@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Custom Theme Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slateDark: {
+                            900: '#111827',
+                            800: '#1E293B',
+                            700: '#334155',
+                            600: '#475569'
+                        },
+                        sand: {
+                            50: '#FAF8F5',
+                            100: '#F3EFEA',
+                            200: '#E5E0D8',
+                            300: '#D5CEC3',
+                            400: '#B8AFA1'
+                        },
+                        bronze: {
+                            DEFAULT: '#8C7355',
+                            light: '#A38B6D',
+                            dark: '#6E5940',
+                            soft: '#EAE3D9'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --bg-canvas: #FAF8F5;
+            --bg-card: #FFFFFF;
+            --text-main: #1E293B;
+            --border-sand: #E5E0D8;
+            --accent-bronze: #8C7355;
+            --accent-bronze-light: #A38B6D;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-main);
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Glass Floating Navigation */
+        .nav-glass {
+            background: rgba(250, 248, 245, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(229, 224, 216, 0.8);
+        }
+
+        /* Clean Warm Neutral Cards */
+        .neutral-card {
+            background-color: #FFFFFF;
+            border: 1px solid var(--border-sand);
+            box-shadow: 0 2px 12px -2px rgba(30, 41, 59, 0.03);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .neutral-card:hover {
+            border-color: var(--accent-bronze-light);
+            box-shadow: 0 10px 24px -4px rgba(30, 41, 59, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D5CEC3;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8C7355;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-bronze selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 nav-glass py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            
+            <!-- BRAND / NAME LOGO -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-slateDark-800 text-sand-50 flex items-center justify-center font-extrabold text-base transition group-hover:bg-bronze">
+                    <!-- EDIT YOUR INITIALS HERE -->
+                    BA
+                </div>
+                <div>
+                    <!-- EDIT YOUR FULL NAME HERE -->
+                    <span class="text-base sm:text-lg font-bold text-slateDark-800 tracking-tight block leading-none font-heading">BELLA AUSTIN</span>
+                    <span class="text-[10px] text-bronze font-semibold uppercase tracking-widest block mt-1">Sports Media Student</span>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAVIGATION LINKS -->
+            <nav class="hidden md:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-slateDark-700">
+                <a href="#about" class="hover:text-bronze transition py-1">About Me</a>
+                <a href="#experience" class="hover:text-bronze transition py-1">Experience</a>
+                <a href="#media-gallery" class="hover:text-bronze transition py-1">Photos & Media</a>
+                <a href="#projects" class="hover:text-bronze transition py-1">Class Projects</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-slateDark-800 text-white font-bold hover:bg-bronze transition shadow-sm">
+                    Get In Touch
+                </a>
+            </nav>
+
+            <!-- MOBILE MENU BUTTON -->
+            <button id="mobile-menu-btn" class="md:hidden text-slateDark-800 hover:text-bronze focus:outline-none p-2" aria-label="Toggle Mobile Navigation">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- MOBILE DRAWER MENU -->
+        <div id="mobile-menu" class="hidden md:hidden bg-sand-100 border-b border-sand-200 px-6 pt-4 pb-6 space-y-4">
+            <a href="#about" class="block text-slateDark-800 hover:text-bronze text-xs font-bold uppercase tracking-wider">About Me</a>
+            <a href="#experience" class="block text-slateDark-800 hover:text-bronze text-xs font-bold uppercase tracking-wider">Experience & Involvement</a>
+            <a href="#media-gallery" class="block text-slateDark-800 hover:text-bronze text-xs font-bold uppercase tracking-wider">Photos & Media Gallery</a>
+            <a href="#projects" class="block text-slateDark-800 hover:text-bronze text-xs font-bold uppercase tracking-wider">Class & Passion Projects</a>
+            <a href="#contact" class="inline-block mt-2 px-6 py-2.5 rounded-xl bg-slateDark-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-bronze transition">
+                Contact Me
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="relative py-16 sm:py-24 bg-gradient-to-b from-sand-100 via-sand-50 to-sand-100 border-b border-sand-200 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- HERO TEXT INTRO -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-bronze/10 border border-bronze/20 text-bronze text-xs font-bold tracking-widest uppercase">
+                            <span class="w-2 h-2 rounded-full bg-bronze animate-pulse"></span>
+                            <!-- EDIT YOUR STATUS / MAJOR -->
+                            Sports Communications and Media, Minor photography @ Miami University
+                        </div>
+
+                        <!-- EDIT MAIN HERO HEADLINE -->
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-slateDark-800 leading-tight tracking-tight">
+                            Aspiring Sports Leader in <span class="text-bronze">Athletics Operations, Marketing & Student Media</span>
+                        </h1>
+
+                        <!-- EDIT SHORT BIO -->
+                        <p class="text-sm sm:text-base text-slateDark-600 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                            Welcome! I'm an enthusiastic college student passionate about gameday fan experience, social media content creation, and fan engagement.
+                        </p>
+
+                        <!-- QUICK TAGS / HIGHLIGHTS -->
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-2 pt-1">
+                            <span class="px-3 py-1 rounded-lg bg-white border border-sand-300 text-slateDark-700 text-xs font-semibold">
+                                <i class="fa-solid fa-graduation-cap text-bronze mr-1.5"></i> Class of '28
+                            </span>
+                            <span class="px-3 py-1 rounded-lg bg-white border border-sand-300 text-slateDark-700 text-xs font-semibold">
+                                <i class="fa-solid fa-bullhorn text-bronze mr-1.5"></i> Athletics Social Media Intern
+                            </span>
+                            <span class="px-3 py-1 rounded-lg bg-white border border-sand-300 text-slateDark-700 text-xs font-semibold">
+                                <i class="fa-solid fa-video text-bronze mr-1.5"></i> Student Broadcast Network
+                            </span>
+                        </div>
+
+                        <!-- CTA BUTTONS -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                            <a href="#media-gallery" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-slateDark-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-bronze transition shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-images text-xs"></i> View Photos & Media
+                            </a>
+                            <!-- EDIT YOUR RESUME LINK (e.g. your Google Drive or PDF link) -->
+                            <a href="#contact" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white border border-sand-300 text-slateDark-800 font-bold text-xs uppercase tracking-wider hover:border-bronze hover:text-bronze transition shadow-sm flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-envelope text-xs"></i> Contact / Download Resume
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- HERO HEADSHOT / PROFILE PHOTO CARD -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md">
+                            <div class="neutral-card p-4 rounded-2xl">
+                                <!-- YOUR HERO PROFILE PHOTO HERE -->
+                                <div class="relative h-80 sm:h-96 rounded-xl overflow-hidden mb-4 bg-sand-200 flex items-center justify-center group">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" 
+                                         alt="Jordan Smith Student Profile Photo" 
+                                         class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700">
+                                    <div class="absolute bottom-3 left-3 right-3 px-3 py-2 bg-slateDark-900/90 backdrop-blur text-white rounded-lg text-xs flex justify-between items-center border border-slateDark-700">
+                                        <span class="font-bold"><i class="fa-solid fa-circle text-bronze mr-1.5 text-[10px]"></i> Seeking Entry-Level Roles</span>
+                                        <span class="text-sand-300">Open to Relocation</span>
+                                    </div>
+                                </div>
+                                <div class="px-2 py-1 flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-bold text-base text-slateDark-800">Jordan Smith</h3>
+                                        <p class="text-xs text-slateDark-600">State University '27 | B.S. Sports Management</p>
+                                    </div>
+                                    <div class="flex gap-1.5">
+                                        <!-- EDIT YOUR SOCIAL LINKS -->
+                                        <a href="https://linkedin.com" target="_blank" class="w-8 h-8 rounded-lg bg-sand-100 border border-sand-300 hover:bg-bronze hover:text-white transition flex items-center justify-center text-slateDark-800" aria-label="LinkedIn">
+                                            <i class="fa-brands fa-linkedin-in text-xs"></i>
+                                        </a>
+                                        <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-lg bg-sand-100 border border-sand-300 hover:bg-bronze hover:text-white transition flex items-center justify-center text-slateDark-800" aria-label="Twitter">
+                                            <i class="fa-brands fa-x-twitter text-xs"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME & EDUCATION SECTION -->
+        <section id="about" class="py-20 bg-sand-50 relative border-b border-sand-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold text-bronze uppercase tracking-widest block mb-2">My Background</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slateDark-800">About Me & Academic Foundation</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                    
+                    <!-- PERSONAL STATEMENT -->
+                    <div class="lg:col-span-7 space-y-5 text-slateDark-600">
+                        <div class="neutral-card p-8 rounded-2xl space-y-4">
+                            <h3 class="text-xl font-bold text-slateDark-800 flex items-center gap-2">
+                                <i class="fa-solid fa-user-graduate text-bronze"></i> Personal Statement
+                            </h3>
+                            <!-- EDIT YOUR PERSONAL BIO / STORY -->
+                            <p class="text-sm leading-relaxed">
+                                As a sports management student with hands-on experience in collegiate athletics operations, I thrive at the intersection of live event execution, fan engagement, and team logistics.
+                            </p>
+                            <p class="text-sm leading-relaxed">
+                                Whether I am coordinating halftime promotions, managing student broadcast equipment, writing post-game press releases, or capturing sideline content, I bring high energy, clear communication, and strong attention to detail.
+                            </p>
+
+                            <!-- INTEREST TAGS -->
+                            <div class="pt-4 border-t border-sand-200">
+                                <span class="text-xs font-bold text-slateDark-800 uppercase block mb-3">Core Areas of Interest:</span>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 bg-sand-100 text-slateDark-800 text-xs font-semibold rounded-lg border border-sand-300">Gameday Event Operations</span>
+                                    <span class="px-3 py-1 bg-sand-100 text-slateDark-800 text-xs font-semibold rounded-lg border border-sand-300">Athletics Marketing & Promotions</span>
+                                    <span class="px-3 py-1 bg-sand-100 text-slateDark-800 text-xs font-semibold rounded-lg border border-sand-300">Sideline Media & Reporting</span>
+                                    <span class="px-3 py-1 bg-sand-100 text-slateDark-800 text-xs font-semibold rounded-lg border border-sand-300">Social Media Content Creation</span>
+                                    <span class="px-3 py-1 bg-sand-100 text-slateDark-800 text-xs font-semibold rounded-lg border border-sand-300">Fan Experience & Sponsorship</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDUCATION & COURSEWORK CARD -->
+                    <div class="lg:col-span-5 neutral-card p-8 rounded-2xl space-y-6">
+                        <h3 class="text-xl font-bold text-slateDark-800 flex items-center gap-2 border-b border-sand-200 pb-4">
+                            <i class="fa-solid fa-building-columns text-bronze"></i> Education Details
+                        </h3>
+
+                        <!-- EDIT UNIVERSITY DETAILS -->
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-base text-slateDark-800">Miami University</span>
+                                <span class="text-xs font-bold px-2.5 py-1 bg-sand-100 text-bronze rounded-md border border-sand-300">Graduating May 2028</span>
+                            </div>
+                            <p class="text-xs font-bold text-bronze">Bachelor of Leadership and Management</p>
+                            <p class="text-xs text-slateDark-600">Minor Photography</p>
+                            <p class="text-xs text-slateDark-700 font-semibold mt-1"><i class="fa-solid fa-star text-bronze text-[10px] mr-1"></i> Cumulative GPA: 2.96 / 4.00</p>
+                        </div>
+
+                        <!-- EDIT RELEVANT COURSEWORK -->
+                        <div class="pt-4 border-t border-sand-200">
+                            <span class="text-xs font-bold text-slateDark-800 uppercase block mb-3">Relevant Coursework:</span>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slateDark-600">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bronze text-[10px]"></i> Sports Law & Governance</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bronze text-[10px]"></i> Athletics Facility Mgmt</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bronze text-[10px]"></i> Sports Marketing & Sponsorship</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bronze text-[10px]"></i> Broadcast Journalism</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bronze text-[10px]"></i> Ticket Sales & CRM</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-bronze text-[10px]"></i> Sports PR & Media Relations</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE & CAMPUS INVOLVEMENT SECTION -->
+        <section id="experience" class="py-20 bg-sand-100 border-b border-sand-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold text-bronze uppercase tracking-widest block mb-2">Hands-On Experience</span>
+                    <h2 class="text-3xl font-extrabold text-slateDark-800">Campus Involvement & Internships</h2>
+                    <p class="text-slateDark-600 text-xs mt-2">A summary of my roles in college sports departments, student media, and volunteer event crews.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- EXPERIENCE CARD 1 -->
+                    <div class="neutral-card p-6 sm:p-8 rounded-2xl space-y-4">
+                        <div class="flex items-start justify-between gap-4 border-b border-sand-200 pb-4">
+                            <div>
+                                <!-- EDIT ROLE TITLE -->
+                                <h3 class="text-base font-bold text-slateDark-800">Athletics Marketing & Gameday Intern</h3>
+                                <!-- EDIT ORGANIZATION / DEPARTMENT -->
+                                <p class="text-xs font-bold text-bronze mt-0.5"><i class="fa-solid fa-university mr-1"></i> State University Athletics Department</p>
+                            </div>
+                            <!-- EDIT DATES -->
+                            <span class="text-[11px] font-bold px-3 py-1 bg-sand-100 text-slateDark-700 rounded-full border border-sand-300 whitespace-nowrap">
+                                Aug 2025 – Present
+                            </span>
+                        </div>
+
+                        <!-- EDIT BULLET POINTS -->
+                        <ul class="space-y-2.5 text-xs text-slateDark-600">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Assist in coordinating on-court promotions and fan giveaways during Division I Basketball and Volleyball home games.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Manage the official student section social media accounts (Instagram / TikTok), growing followers by 25%.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Operate the LED ribbon boards and script audio announcements during timeout intervals.</span>
+                            </li>
+                        </ul>
+
+                        <div class="pt-2 flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Gameday Ops</span>
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Social Media</span>
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Fan Engagement</span>
+                        </div>
+                    </div>
+
+                    <!-- EXPERIENCE CARD 2 -->
+                    <div class="neutral-card p-6 sm:p-8 rounded-2xl space-y-4">
+                        <div class="flex items-start justify-between gap-4 border-b border-sand-200 pb-4">
+                            <div>
+                                <!-- EDIT ROLE TITLE -->
+                                <h3 class="text-base font-bold text-slateDark-800">Student Sideline Reporter & Content Crew</h3>
+                                <!-- EDIT ORGANIZATION / DEPARTMENT -->
+                                <p class="text-xs font-bold text-bronze mt-0.5"><i class="fa-solid fa-tower-cell mr-1"></i> Student Sports Broadcast Network</p>
+                            </div>
+                            <!-- EDIT DATES -->
+                            <span class="text-[11px] font-bold px-3 py-1 bg-sand-100 text-slateDark-700 rounded-full border border-sand-300 whitespace-nowrap">
+                                Sep 2024 – Present
+                            </span>
+                        </div>
+
+                        <!-- EDIT BULLET POINTS -->
+                        <ul class="space-y-2.5 text-xs text-slateDark-600">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Conduct live post-game interview segments with head coaches and student-athletes for web broadcasts.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Write game recaps and weekly opponent preview articles for the student sports website.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Operate sideline video camera equipment during home football and soccer matches.</span>
+                            </li>
+                        </ul>
+
+                        <div class="pt-2 flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Sideline Interviewing</span>
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Sports Writing</span>
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Camera Operations</span>
+                        </div>
+                    </div>
+
+                    <!-- EXPERIENCE CARD 3 -->
+                    <div class="neutral-card p-6 sm:p-8 rounded-2xl space-y-4">
+                        <div class="flex items-start justify-between gap-4 border-b border-sand-200 pb-4">
+                            <div>
+                                <!-- EDIT ROLE TITLE -->
+                                <h3 class="text-base font-bold text-slateDark-800">President / Student Club Lead</h3>
+                                <!-- EDIT ORGANIZATION / DEPARTMENT -->
+                                <p class="text-xs font-bold text-bronze mt-0.5"><i class="fa-solid fa-users mr-1"></i> Sports Business Student Association</p>
+                            </div>
+                            <!-- EDIT DATES -->
+                            <span class="text-[11px] font-bold px-3 py-1 bg-sand-100 text-slateDark-700 rounded-full border border-sand-300 whitespace-nowrap">
+                                Jan 2025 – Present
+                            </span>
+                        </div>
+
+                        <!-- EDIT BULLET POINTS -->
+                        <ul class="space-y-2.5 text-xs text-slateDark-600">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Organize monthly guest speaker panels featuring visiting sports executives and regional alumni.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Coordinate annual student field trips to regional professional stadium headquarters.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Manage club budget and organize networking workshops for 60+ undergraduate members.</span>
+                            </li>
+                        </ul>
+
+                        <div class="pt-2 flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Leadership</span>
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Event Planning</span>
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Networking</span>
+                        </div>
+                    </div>
+
+                    <!-- EXPERIENCE CARD 4 -->
+                    <div class="neutral-card p-6 sm:p-8 rounded-2xl space-y-4">
+                        <div class="flex items-start justify-between gap-4 border-b border-sand-200 pb-4">
+                            <div>
+                                <!-- EDIT ROLE TITLE -->
+                                <h3 class="text-base font-bold text-slateDark-800">Tournament Volunteer Crew</h3>
+                                <!-- EDIT ORGANIZATION / DEPARTMENT -->
+                                <p class="text-xs font-bold text-bronze mt-0.5"><i class="fa-solid fa-trophy mr-1"></i> Regional High School Basketball State Finals</p>
+                            </div>
+                            <!-- EDIT DATES -->
+                            <span class="text-[11px] font-bold px-3 py-1 bg-sand-100 text-slateDark-700 rounded-full border border-sand-300 whitespace-nowrap">
+                                ----
+                            </span>
+                        </div>
+
+                        <!-- EDIT BULLET POINTS -->
+                        <ul class="space-y-2.5 text-xs text-slateDark-600">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Assisted team liaisons with credential checking, locker room preparation, and press row seating.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-angle-right text-bronze mt-0.5 text-xs"></i>
+                                <span>Helped direct visiting fans, official media crews, and VIP ticket holders through venue entrances.</span>
+                            </li>
+                        </ul>
+
+                        <div class="pt-2 flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Event Operations</span>
+                            <span class="px-2.5 py-0.5 bg-sand-50 text-slateDark-700 text-[11px] font-medium rounded border border-sand-300">Guest Services</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PHOTOS, VIDEOS & MEDIA GALLERY SECTION -->
+        <section id="media-gallery" class="py-20 bg-sand-50 border-b border-sand-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                    <div>
+                        <span class="text-xs font-bold text-bronze uppercase tracking-widest block mb-2">Visual Experience</span>
+                        <h2 class="text-3xl font-extrabold text-slateDark-800">Photos, Video Reels & Design Work</h2>
+                        <p class="text-xs text-slateDark-600 mt-1">Gameday action photos, sideline reporting videos, and social graphics.</p>
+                    </div>
+
+                    <!-- GALLERY CATEGORY FILTER BUTTONS -->
+                    <div class="flex flex-wrap gap-2 mt-6 md:mt-0" id="gallery-filters">
+                        <button class="gallery-filter-btn active px-4 py-2 rounded-xl text-xs font-bold transition bg-slateDark-800 text-white shadow-sm" data-filter="all">
+                            All Media
+                        </button>
+                        <button class="gallery-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white border border-sand-300 text-slateDark-700 hover:border-bronze hover:text-bronze" data-filter="photos">
+                            <i class="fa-solid fa-camera mr-1"></i> Photos
+                        </button>
+                        <button class="gallery-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white border border-sand-300 text-slateDark-700 hover:border-bronze hover:text-bronze" data-filter="videos">
+                            <i class="fa-solid fa-video mr-1"></i> Videos / Reels
+                        </button>
+                        <button class="gallery-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-white border border-sand-300 text-slateDark-700 hover:border-bronze hover:text-bronze" data-filter="graphics">
+                            <i class="fa-solid fa-image mr-1"></i> Social Graphics
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GALLERY GRID ITEMS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+                    
+                    <!-- GALLERY ITEM 1: PHOTO -->
+                    <div class="gallery-item neutral-card rounded-2xl overflow-hidden group cursor-pointer" data-category="photos">
+                        <!-- REPLACE WITH YOUR GAMEDAY PHOTO -->
+                        <div class="relative h-60 overflow-hidden bg-slateDark-800">
+                            <img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Gameday Operations at Stadium" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slateDark-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="px-4 py-2 rounded-xl bg-white/90 text-slateDark-900 text-xs font-bold backdrop-blur">
+                                    <i class="fa-solid fa-expand mr-1"></i> Preview Photo
+                                </span>
+                            </div>
+                            <span class="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur text-slateDark-800 text-[10px] font-bold rounded-full border border-sand-300">
+                                Photo
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-sm font-bold text-slateDark-800">Baseball Gameday Setup</h3>
+                            <p class="text-xs text-slateDark-600 mt-1">Press box view during NCAA Division I regional tournament.</p>
+                        </div>
+                    </div>
+
+                    <!-- GALLERY ITEM 2: VIDEO -->
+                    <div class="gallery-item neutral-card rounded-2xl overflow-hidden group cursor-pointer" data-category="videos">
+                        <!-- REPLACE WITH YOUR VIDEO THUMBNAIL -->
+                        <div class="relative h-60 overflow-hidden bg-slateDark-800">
+                            <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Sideline Broadcast Clip Thumbnail" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slateDark-900/40 flex items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-bronze text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                            </div>
+                            <span class="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur text-slateDark-800 text-[10px] font-bold rounded-full border border-sand-300">
+                                Video Reel
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-sm font-bold text-slateDark-800">Sideline Report: Post-Game Halftime</h3>
+                            <p class="text-xs text-slateDark-600 mt-1">60-second recap snippet for student network broadcast.</p>
+                        </div>
+                    </div>
+
+                    <!-- GALLERY ITEM 3: GRAPHIC -->
+                    <div class="gallery-item neutral-card rounded-2xl overflow-hidden group cursor-pointer" data-category="graphics">
+                        <!-- REPLACE WITH YOUR GRAPHIC FLYER IMAGE -->
+                        <div class="relative h-60 overflow-hidden bg-slateDark-800">
+                            <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Gameday Match Graphic Flyer" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slateDark-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="px-4 py-2 rounded-xl bg-white/90 text-slateDark-900 text-xs font-bold backdrop-blur">
+                                    <i class="fa-solid fa-expand mr-1"></i> Preview Graphic
+                                </span>
+                            </div>
+                            <span class="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur text-slateDark-800 text-[10px] font-bold rounded-full border border-sand-300">
+                                Graphic Flyer
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-sm font-bold text-slateDark-800">Basketball Pack-The-House Graphic</h3>
+                            <p class="text-xs text-slateDark-600 mt-1">Designed on Canva for athletics Instagram promotion.</p>
+                        </div>
+                    </div>
+
+                    <!-- GALLERY ITEM 4: PHOTO -->
+                    <div class="gallery-item neutral-card rounded-2xl overflow-hidden group cursor-pointer" data-category="photos">
+                        <!-- REPLACE WITH YOUR PHOTO -->
+                        <div class="relative h-60 overflow-hidden bg-slateDark-800">
+                            <img src="https://images.unsplash.com/photo-1517649763962-0c623266010b?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Student Section Fan Engagement" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slateDark-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="px-4 py-2 rounded-xl bg-white/90 text-slateDark-900 text-xs font-bold backdrop-blur">
+                                    <i class="fa-solid fa-expand mr-1"></i> Preview Photo
+                                </span>
+                            </div>
+                            <span class="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur text-slateDark-800 text-[10px] font-bold rounded-full border border-sand-300">
+                                Photo
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-sm font-bold text-slateDark-800">Student Section Fan Activation</h3>
+                            <p class="text-xs text-slateDark-600 mt-1">Coordinating T-shirt toss promotion during rival game.</p>
+                        </div>
+                    </div>
+
+                    <!-- GALLERY ITEM 5: VIDEO -->
+                    <div class="gallery-item neutral-card rounded-2xl overflow-hidden group cursor-pointer" data-category="videos">
+                        <!-- REPLACE WITH YOUR VIDEO THUMBNAIL -->
+                        <div class="relative h-60 overflow-hidden bg-slateDark-800">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Podcast Interview Thumbnail" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slateDark-900/40 flex items-center justify-center">
+                                <div class="w-12 h-12 rounded-full bg-bronze text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </div>
+                            </div>
+                            <span class="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur text-slateDark-800 text-[10px] font-bold rounded-full border border-sand-300">
+                                Video Podcast
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-sm font-bold text-slateDark-800">Campus Sports Podcast Segment</h3>
+                            <p class="text-xs text-slateDark-600 mt-1">Interviewing senior athletic trainer on player wellness.</p>
+                        </div>
+                    </div>
+
+                    <!-- GALLERY ITEM 6: GRAPHIC -->
+                    <div class="gallery-item neutral-card rounded-2xl overflow-hidden group cursor-pointer" data-category="graphics">
+                        <!-- REPLACE WITH YOUR GRAPHIC IMAGE -->
+                        <div class="relative h-60 overflow-hidden bg-slateDark-800">
+                            <img src="https://images.unsplash.com/photo-1579952318893-20a31006100e?auto=format&fit=crop&w=800&q=80" 
+                                 alt="Infographic Case Study" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-slateDark-900/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                                <span class="px-4 py-2 rounded-xl bg-white/90 text-slateDark-900 text-xs font-bold backdrop-blur">
+                                    <i class="fa-solid fa-expand mr-1"></i> Preview Graphic
+                                </span>
+                            </div>
+                            <span class="absolute top-3 right-3 px-3 py-1 bg-white/90 backdrop-blur text-slateDark-800 text-[10px] font-bold rounded-full border border-sand-300">
+                                Social Graphic
+                            </span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-sm font-bold text-slateDark-800">Soccer Tournament Schedule Infographic</h3>
+                            <p class="text-xs text-slateDark-600 mt-1">Weekly match schedule graphic formatted for Instagram stories.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FEATURED CLASS PROJECTS & WORK SAMPLES SECTION -->
+        <section id="projects" class="py-20 bg-sand-100 border-b border-sand-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-bold text-bronze uppercase tracking-widest block mb-2">Academic & Passion Projects</span>
+                    <h2 class="text-3xl font-extrabold text-slateDark-800">Featured Coursework & Case Studies</h2>
+                    <p class="text-xs text-slateDark-600 mt-2">Projects completed for sports management courses, research proposals, and marketing plans.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- PROJECT CARD 1 -->
+                    <div class="neutral-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-sand-200 text-bronze flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <span class="text-[10px] font-bold px-2.5 py-0.5 bg-sand-200 text-slateDark-800 rounded uppercase">Sports Marketing Class</span>
+                            <!-- EDIT PROJECT TITLE -->
+                            <h3 class="text-base font-bold text-slateDark-800">Ticket Sales & Fan Loyalty Campaign Plan</h3>
+                            <!-- EDIT PROJECT DESCRIPTION -->
+                            <p class="text-xs text-slateDark-600 leading-relaxed">
+                                Developed a semester-long marketing strategy proposal aimed at increasing student ticket attendance for midweek soccer matches. Included tier pricing and food trucks incentives.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-sand-200 flex items-center justify-between text-xs">
+                            <span class="text-slateDark-600 font-semibold">Key Output: 15-Page Strategy Pitch</span>
+                            <span class="text-bronze font-bold">Grade: A</span>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT CARD 2 -->
+                    <div class="neutral-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-sand-200 text-bronze flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-warehouse"></i>
+                            </div>
+                            <span class="text-[10px] font-bold px-2.5 py-0.5 bg-sand-200 text-slateDark-800 rounded uppercase">Facility Management Class</span>
+                            <!-- EDIT PROJECT TITLE -->
+                            <h3 class="text-base font-bold text-slateDark-800">Arena Gate Flow & Security Audit Proposal</h3>
+                            <!-- EDIT PROJECT DESCRIPTION -->
+                            <p class="text-xs text-slateDark-600 leading-relaxed">
+                                Conducted an on-site observation audit of campus arena entry points during rivalry weekend. Proposed a revised queue line system to reduce entry wait times by 20%.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-sand-200 flex items-center justify-between text-xs">
+                            <span class="text-slateDark-600 font-semibold">Key Output: Floorplan Blueprint</span>
+                            <span class="text-bronze font-bold">Grade: A</span>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT CARD 3 -->
+                    <div class="neutral-card p-6 rounded-2xl flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-sand-200 text-bronze flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid fa-newspaper"></i>
+                            </div>
+                            <span class="text-[10px] font-bold px-2.5 py-0.5 bg-sand-200 text-slateDark-800 rounded uppercase">Independent Passion Project</span>
+                            <!-- EDIT PROJECT TITLE -->
+                            <h3 class="text-base font-bold text-slateDark-800">Weekly Conference Recaps & Substack Blog</h3>
+                            <!-- EDIT PROJECT DESCRIPTION -->
+                            <p class="text-xs text-slateDark-600 leading-relaxed">
+                                Published 12 weekly newsletters analyzing collegiate athletic conference realignment, NIL sponsorship trends, and venue attendance numbers across the Midwest region.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-sand-200 flex items-center justify-between text-xs">
+                            <span class="text-slateDark-600 font-semibold">Key Output: 500+ Subscribers</span>
+                            <span class="text-bronze font-bold">Published</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 bg-sand-50 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    
+                    <!-- CONTACT INFO -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <span class="text-xs font-bold text-bronze uppercase tracking-widest block mb-2">Let's Connect</span>
+                            <h2 class="text-3xl font-extrabold text-slateDark-800">Get In Touch</h2>
+                            <p class="text-slateDark-600 text-xs mt-3 leading-relaxed">
+                                I am actively seeking entry-level roles, graduate assistantships, and sports department internships. Feel free to reach out directly!
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <!-- EDIT YOUR EMAIL -->
+                            <div class="p-4 rounded-xl neutral-card flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-sand-100 border border-sand-300 text-bronze flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slateDark-600 uppercase font-bold block">Email Address</span>
+                                    <a href="mailto:jordan.smith@stateuniversity.edu" class="text-xs font-bold text-slateDark-800 hover:text-bronze transition">jordan.smith@stateuniversity.edu</a>
+                                </div>
+                            </div>
+
+                            <!-- EDIT YOUR PHONE -->
+                            <div class="p-4 rounded-xl neutral-card flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-sand-100 border border-sand-300 text-bronze flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slateDark-600 uppercase font-bold block">Phone Number</span>
+                                    <span class="text-xs font-bold text-slateDark-800">(555) 234-5678</span>
+                                </div>
+                            </div>
+
+                            <!-- EDIT YOUR LOCATION -->
+                            <div class="p-4 rounded-xl neutral-card flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg bg-sand-100 border border-sand-300 text-bronze flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] text-slateDark-600 uppercase font-bold block">Current Location</span>
+                                    <span class="text-xs font-bold text-slateDark-800">Columbus, OH (Open to Relocation)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SOCIAL MEDIA PROFILES -->
+                        <div class="pt-2">
+                            <span class="text-xs font-bold text-slateDark-600 uppercase tracking-wider block mb-3">Connect On Socials</span>
+                            <div class="flex items-center gap-3">
+                                <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-xl neutral-card flex items-center justify-center text-slateDark-700 hover:text-white hover:bg-bronze transition" aria-label="LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://twitter.com" target="_blank" class="w-10 h-10 rounded-xl neutral-card flex items-center justify-center text-slateDark-700 hover:text-white hover:bg-bronze transition" aria-label="X Twitter">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-xl neutral-card flex items-center justify-center text-slateDark-700 hover:text-white hover:bg-bronze transition" aria-label="Instagram">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                <a href="https://youtube.com" target="_blank" class="w-10 h-10 rounded-xl neutral-card flex items-center justify-center text-slateDark-700 hover:text-white hover:bg-bronze transition" aria-label="YouTube">
+                                    <i class="fa-brands fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INQUIRY FORM -->
+                    <div class="lg:col-span-7">
+                        <div class="neutral-card p-8 rounded-2xl">
+                            <h3 class="text-lg font-bold text-slateDark-800 mb-6">Send a Quick Message</h3>
+                            
+                            <form id="contact-form" class="space-y-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-[11px] font-bold text-slateDark-700 uppercase mb-2">Your Name *</label>
+                                        <input type="text" required placeholder="e.g. Alex Taylor" 
+                                               class="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-3 text-xs text-slateDark-800 placeholder-slateDark-600 focus:outline-none focus:border-bronze">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[11px] font-bold text-slateDark-700 uppercase mb-2">Your Email *</label>
+                                        <input type="email" required placeholder="alex@athletics.org" 
+                                               class="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-3 text-xs text-slateDark-800 placeholder-slateDark-600 focus:outline-none focus:border-bronze">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slateDark-700 uppercase mb-2">Organization / Department</label>
+                                    <input type="text" placeholder="e.g. Regional Sports Network / University Athletics" 
+                                           class="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-3 text-xs text-slateDark-800 placeholder-slateDark-600 focus:outline-none focus:border-bronze">
+                                </div>
+
+                                <div>
+                                    <label class="block text-[11px] font-bold text-slateDark-700 uppercase mb-2">Message *</label>
+                                    <textarea rows="4" required placeholder="Hi Jordan, I saw your sports portfolio and wanted to connect regarding..." 
+                                              class="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-3 text-xs text-slateDark-800 placeholder-slateDark-600 focus:outline-none focus:border-bronze"></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full py-3.5 rounded-xl bg-slateDark-800 text-white font-bold hover:bg-bronze transition shadow-md text-xs uppercase tracking-wider flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i> Send Message
+                                </button>
+                            </form>
+
+                            <div id="form-feedback" class="hidden mt-4 p-4 rounded-xl bg-sand-200 border border-sand-300 text-slateDark-800 text-xs font-bold text-center">
+                                <i class="fa-solid fa-circle-check text-bronze mr-2"></i> Message sent! I will get back to you shortly.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slateDark-900 text-white py-12 border-t border-slateDark-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-bronze text-white font-extrabold flex items-center justify-center text-xs">
+                        JS
+                    </div>
+                    <span class="text-xs text-sand-300">
+                        &copy; <span id="footer-year"></span> Jordan Smith. College Sports Portfolio.
+                    </span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 text-xs text-sand-300 font-semibold">
+                    <a href="#about" class="hover:text-bronze-light transition">About Me</a>
+                    <a href="#experience" class="hover:text-bronze-light transition">Experience</a>
+                    <a href="#media-gallery" class="hover:text-bronze-light transition">Media Gallery</a>
+                    <a href="#projects" class="hover:text-bronze-light transition">Class Projects</a>
+                    <a href="#contact" class="hover:text-bronze-light transition">Contact</a>
+                </div>
+
+                <a href="#home" class="w-9 h-9 rounded-full bg-slateDark-800 border border-slateDark-700 flex items-center justify-center text-bronze-light hover:bg-bronze hover:text-white transition" aria-label="Back to top">
+                    <i class="fa-solid fa-arrow-up text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX / PREVIEW MODAL FOR GALLERY -->
+    <div id="gallery-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slateDark-900/80 backdrop-blur-sm">
+        <div class="neutral-card max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl relative">
+            <div class="relative h-80 bg-slateDark-800 overflow-hidden flex items-center justify-center">
+                <img id="modal-image" src="" alt="Gallery Preview" class="w-full h-full object-cover">
+                <button id="close-modal-btn" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-slateDark-900/80 text-white hover:bg-bronze flex items-center justify-center text-sm" aria-label="Close Preview">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-2">
+                <h3 id="modal-title" class="text-lg font-bold text-slateDark-800">Media Preview Title</h3>
+                <p id="modal-desc" class="text-xs text-slateDark-600">Media description text...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set dynamic current year in footer
+            document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            // Media Gallery Category Filtering
+            const galleryFilterBtns = document.querySelectorAll('.gallery-filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            galleryFilterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    galleryFilterBtns.forEach(b => {
+                        b.classList.remove('bg-slateDark-800', 'text-white');
+                        b.classList.add('bg-white', 'text-slateDark-700', 'border', 'border-sand-300');
+                    });
+                    btn.classList.remove('bg-white', 'text-slateDark-700', 'border', 'border-sand-300');
+                    btn.classList.add('bg-slateDark-800', 'text-white');
+
+                    const filter = btn.getAttribute('data-filter');
+
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Lightbox Modal for Gallery Images
+            const modal = document.getElementById('gallery-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDesc = document.getElementById('modal-desc');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    const title = item.querySelector('h3');
+                    const desc = item.querySelector('p');
+
+                    if (img && title && desc) {
+                        modalImage.src = img.src;
+                        modalTitle.textContent = title.textContent;
+                        modalDesc.textContent = desc.textContent;
+                        modal.classList.remove('hidden');
+                    }
+                });
+            });
+
+            const hideModal = () => modal.classList.add('hidden');
+            closeModalBtn.addEventListener('click', hideModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) hideModal();
+            });
+
+            // Form Submit Feedback
+            const contactForm = document.getElementById('contact-form');
+            const feedback = document.getElementById('form-feedback');
+
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                contactForm.reset();
+                feedback.classList.remove('hidden');
+                setTimeout(() => feedback.classList.add('hidden'), 4000);
+            });
+        });
+    </script>
+</body>
+</html>
